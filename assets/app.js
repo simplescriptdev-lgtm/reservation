@@ -1,3 +1,4 @@
+// FIXED: table color state uses numeric IDs consistently (+t.id)
 // App v2: areas, colors by availability, history, smaller icons
 const api = (action, opts={}) =>
   fetch(`/api.php?action=${action}`, {
@@ -39,6 +40,7 @@ function init() {
       btn.classList.add('active');
       state.area = btn.dataset.area;
       loadTables();
+      loadBusy();
     });
   });
 
@@ -48,7 +50,7 @@ function init() {
     const body = Object.fromEntries(fd.entries());
     body.number = +body.number; body.seats = +body.seats;
     const res = await api('add_table', {body});
-    if (res.ok) { await loadTables(); e.target.reset(); }
+    if (res.ok) { await loadTables(); await loadBusy(); e.target.reset(); }
   });
 
   $('#save-layout').addEventListener('click', saveLayout);
@@ -87,7 +89,7 @@ async function loadBusy(){
 }
 
 async function saveLayout() {
-  await Promise.all(state.tables.map(t => api('update_table_pos', {body:{id:t.id, x:t.x, y:t.y}})));
+  await Promise.all(state.tables.map(t => api('update_table_pos', {body:{id:+t.id, x:t.x, y:t.y}})));
   alert('Розміщення збережено');
 }
 
@@ -113,14 +115,14 @@ function renderTableList() {
     item.style.justifyContent = 'space-between';
     item.style.alignItems = 'center';
     item.style.padding = '6px 4px';
-    const busy = state.busyTableIds.has(t.id);
+    const busy = state.busyTableIds.has(+t.id); // <-- FIX
     const badgeColor = busy ? '#3d0f14' : '#0f3d24';
     item.innerHTML = `<span>#${t.number} <span class="table-chip" style="background:${badgeColor}; border-color:#2d6cdf">${t.seats}</span></span>
       <button class="btn" data-del="${t.id}">×</button>`;
     item.querySelector('button').addEventListener('click', async () => {
       if (confirm('Видалити стіл #' + t.number + '?')) {
         await api('delete_table&id=' + t.id);
-        loadTables();
+        await loadTables(); await loadBusy();
       }
     });
     box.appendChild(item);
@@ -141,7 +143,7 @@ function renderCanvas() {
     g.setAttribute('data-id', t.id);
     g.style.cursor = 'move';
 
-    const busy = state.busyTableIds.has(t.id);
+    const busy = state.busyTableIds.has(+t.id); // <-- FIX
     const fillColor = busy ? '#6b1a22' : '#174a31';
     const strokeColor = '#2d6cdf';
 
@@ -180,11 +182,11 @@ function renderCanvas() {
     label.setAttribute('y', y);
 
     g.addEventListener('mousedown', (ev) => {
-      state.draggingId = t.id;
+      state.draggingId = +t.id;
       state.offset = {x: ev.offsetX - x, y: ev.offsetY - y};
     });
     svg.addEventListener('mousemove', (ev) => {
-      if (state.draggingId === t.id) {
+      if (state.draggingId === +t.id) {
         const nx = ev.offsetX - state.offset.x;
         const ny = ev.offsetY - state.offset.y;
         t.x = Math.max(24, Math.min(876, nx));
