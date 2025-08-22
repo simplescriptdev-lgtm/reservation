@@ -10,10 +10,14 @@ a{color:#9ecbff}
 .sidebar{background:#151924;border:1px solid #222;border-radius:12px;padding:12px;height:100%}
 .sidebar h3{margin:10px 0}
 .sidebar .badge{background:#2d3342;padding:2px 8px;border-radius:999px}
-.sidebar .list{max-height:300px;overflow:auto;border:1px dashed #333;border-radius:8px;padding:8px}
+.sidebar .list{max-height:260px;overflow:auto;border:1px dashed #333;border-radius:8px;padding:8px}
 .canvas-wrap{background:#151924;border:1px solid #222;border-radius:12px;padding:12px}
 .canvas-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 #floor-canvas{background:#0b0e13;border:1px dashed #2a2f3a;border-radius:8px}
+.legend{margin-top:8px;opacity:.8}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;border:1px solid #333}
+.dot-green{background:#0f3d24}
+.dot-red{background:#3d0f14}
 .auth{display:flex;align-items:center;justify-content:center;height:100vh}
 .auth-card{background:#151924;border:1px solid #222;border-radius:12px;padding:24px;width:360px}
 .auth-card form{display:grid;gap:10px}
@@ -29,3 +33,6 @@ a{color:#9ecbff}
 .res-table th,.res-table td{border-bottom:1px solid #222;padding:8px;text-align:left}
 .btn{background:#2a2f3a;border:none;border-radius:6px;color:#ddd;padding:6px 10px;cursor:pointer}
 .table-chip{display:inline-block;background:#243048;border:1px solid #2d6cdf;padding:2px 6px;border-radius:999px;font-size:.85em}
+.tabs{display:flex;gap:6px;margin:6px 0 10px}
+.tab{border:1px solid #2a2f3a;background:#0b0e13;color:#dbeafe;border-radius:8px;padding:6px 10px;cursor:pointer}
+.tab.active{background:#2a2f3a}
