@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'] ?? '';
   $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
   $stmt->execute([$email]);
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
+  $user = $stmt->fetch();
   if ($user && password_verify($password, $user['password_hash'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['full_name'] = $user['full_name'];
@@ -27,9 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="auth">
   <div class="auth-card">
     <h1>Вхід</h1>
-    <?php if (!empty($error)): ?>
-      <div class="alert"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+    <?php if (!empty($error)): ?><div class="alert"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <form method="post">
       <label>Email
         <input name="email" type="email" placeholder="admin@example.com" required>

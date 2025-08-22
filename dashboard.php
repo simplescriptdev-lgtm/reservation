@@ -1,9 +1,6 @@
 <?php
 require __DIR__ . '/db.php';
-if (empty($_SESSION['user_id'])) {
-  header('Location: /login.php');
-  exit;
-}
+if (empty($_SESSION['user_id'])) { header('Location: /login.php'); exit; }
 ?>
 <!doctype html>
 <html lang="uk">
@@ -23,6 +20,11 @@ if (empty($_SESSION['user_id'])) {
     <aside class="sidebar">
       <h3>Дата</h3>
       <input type="date" id="res-date">
+      <h3>Зона</h3>
+      <div class="tabs">
+        <button class="tab active" data-area="hall">Зал</button>
+        <button class="tab" data-area="terrace">Тераса</button>
+      </div>
       <h3>Столи <span id="table-count" class="badge">0</span></h3>
       <div id="table-list" class="list"></div>
       <h3>Додати стіл</h3>
@@ -35,6 +37,12 @@ if (empty($_SESSION['user_id'])) {
             <option value="rect">Прямокутний</option>
           </select>
         </label>
+        <label>Зона
+          <select name="area">
+            <option value="hall">Зал</option>
+            <option value="terrace">Тераса</option>
+          </select>
+        </label>
         <button type="submit">Додати</button>
       </form>
     </aside>
@@ -44,6 +52,10 @@ if (empty($_SESSION['user_id'])) {
         <button id="save-layout">Зберегти розміщення</button>
       </div>
       <svg id="floor-canvas" width="900" height="520"></svg>
+      <div class="legend">
+        <span class="dot dot-green"></span> Вільний
+        <span class="dot dot-red" style="margin-left:16px;"></span> Зарезервовано
+      </div>
     </section>
   </main>
   <section class="reservations">
@@ -70,6 +82,21 @@ if (empty($_SESSION['user_id'])) {
         </tr>
       </thead>
       <tbody id="res-tbody"></tbody>
+    </table>
+
+    <h2 style="margin-top:18px;">Історія резервацій (видалені) — <span id="res-date-label-2"></span></h2>
+    <table class="res-table">
+      <thead>
+        <tr>
+          <th>Година</th>
+          <th>Прізвище</th>
+          <th>К-сть осіб</th>
+          <th>Стіл</th>
+          <th>Нотатки</th>
+          <th>Видалено</th>
+        </tr>
+      </thead>
+      <tbody id="history-tbody"></tbody>
     </table>
   </section>
 
