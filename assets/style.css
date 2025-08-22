@@ -1,0 +1,31 @@
+*{box-sizing:border-box;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+body{margin:0;background:#0f1115;color:#e6e6e6}
+a{color:#9ecbff}
+.topbar{display:flex;align-items:center;padding:12px 16px;background:#151924;border-bottom:1px solid #222}
+.topbar .brand{font-weight:700;letter-spacing:.3px}
+.topbar .spacer{flex:1}
+.topbar .user{margin-right:12px;opacity:.9}
+.topbar .logout{background:#2a2f3a;padding:8px 12px;border-radius:8px;text-decoration:none}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:16px;padding:16px}
+.sidebar{background:#151924;border:1px solid #222;border-radius:12px;padding:12px;height:100%}
+.sidebar h3{margin:10px 0}
+.sidebar .badge{background:#2d3342;padding:2px 8px;border-radius:999px}
+.sidebar .list{max-height:300px;overflow:auto;border:1px dashed #333;border-radius:8px;padding:8px}
+.canvas-wrap{background:#151924;border:1px solid #222;border-radius:12px;padding:12px}
+.canvas-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#floor-canvas{background:#0b0e13;border:1px dashed #2a2f3a;border-radius:8px}
+.auth{display:flex;align-items:center;justify-content:center;height:100vh}
+.auth-card{background:#151924;border:1px solid #222;border-radius:12px;padding:24px;width:360px}
+.auth-card form{display:grid;gap:10px}
+.auth-card input{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0b0e13;color:#e6e6e6}
+.auth-card button{padding:10px;border:none;border-radius:8px;background:#2d6cdf;color:#fff;font-weight:600}
+.alert{background:#3a1e1e;border:1px solid #723; padding:8px;border-radius:8px;margin-bottom:8px}
+.hint{opacity:.7;font-size:.9em}
+.reservations{padding:0 16px 24px}
+.res-form{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}
+.res-form input, .res-form select{padding:8px;border-radius:8px;border:1px solid #333;background:#0b0e13;color:#e6e6e6}
+.res-form button{border:none;border-radius:8px;background:#2d6cdf;color:#fff}
+.res-table{width:100%;border-collapse:collapse;background:#151924;border:1px solid #222;border-radius:12px;overflow:hidden}
+.res-table th,.res-table td{border-bottom:1px solid #222;padding:8px;text-align:left}
+.btn{background:#2a2f3a;border:none;border-radius:6px;color:#ddd;padding:6px 10px;cursor:pointer}
+.table-chip{display:inline-block;background:#243048;border:1px solid #2d6cdf;padding:2px 6px;border-radius:999px;font-size:.85em}
